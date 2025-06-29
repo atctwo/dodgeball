@@ -8,5 +8,4 @@
 - [x] custom mode
 - [x] link colours
 - [x] new record
-- [ ] lives
 - [x] delete scores?
