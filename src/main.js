@@ -213,6 +213,9 @@ window.ext_game_quit = () => {
 
 window.ext_game_start_custom = () => {
 
+    // set level
+    current_level = -1;
+
     // set custom settings
     let new_settings = {};
 
