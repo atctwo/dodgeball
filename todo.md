@@ -9,4 +9,4 @@
 - [x] link colours
 - [x] new record
 - [ ] lives
-- [ ] delete scores?
+- [x] delete scores?

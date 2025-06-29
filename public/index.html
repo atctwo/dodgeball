@@ -61,7 +61,8 @@
             </table>
             <br><br>
             <button class="button" onclick="switch_menu('custom')">Custom Mode</button>
-            <button class="button" onclick="switch_menu('about')">About Game</button><br>
+            <button class="button" onclick="switch_menu('about')">About Game</button>
+            <button class="button" onclick="switch_menu('clear-data')">Clear Data</button><br>
             <div class="debug">
                 <button class="button" onclick="switch_menu()">Hide Menu Overlay</button>
                 <button class="button" onclick="ext_game_resume();">Start with default settings</button>
@@ -71,7 +72,7 @@
         <div class="menu" id="menu-about">
             <h1>About</h1>
             <p>
-                Welcome to <cite>Dodge the Spiked Balls</cite>.  This is a blatant clone of the minigame of the same name from 
+                Welcome to <cite>Dodge the Spiked Balls</cite>!  This is a blatant clone of the minigame of the same name from 
                 <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_2_Welcome_Tour"><cite>Nintendo Switch 2 Welcome Tour</cite></a>.
                 I decided to make this because I thought that it would be fun (and within my ability) to recreate in a weekend.
                 It's not 100% perfect compared to the base game but it feels pretty similar (and I think it's still fun either way!).
@@ -102,6 +103,21 @@
             <p>Made by alex (<a href="https://atctwo.net">atctwo</a>) in june 2025 :3</p>
 
             <button class="button" onclick="switch_menu('main')">Main Menu</button>
+        </div>
+        
+        <div class="menu" id="menu-clear-data">
+            <h1>Clear Data</h1>
+
+            <p>Are you sure?  This will delete all of your locally stored scores.  Lost data can't be recovered!</p>
+
+            <button class="button" onclick="ext_clear_data(); switch_menu('cleared-data')">Proceed</button>
+            <button class="button" onclick="switch_menu('main')">Cancel</button>
+        </div>
+
+        <div class="menu" id="menu-cleared-data">
+            <h1>Data Cleared</h1>
+            <p>Data cleared successfully!</p>
+            <button class="button" onclick="switch_menu('main')">Return to Main Menu</button>
         </div>
 
         <div class="menu" id="menu-custom">

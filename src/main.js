@@ -244,6 +244,10 @@ window.ext_game_start_custom = () => {
 
 }
 
+window.ext_clear_data = () => {
+    localStorage.clear();
+    load_scores();
+}
 
 //---------------------------------------------
 // high score handling
