@@ -1,0 +1,11 @@
+# todo list
+- [x] angle -> acceleration vector
+- [ ] big ball
+- [ ] green ball
+- [ ] red ball
+- [x] score tracking
+- [x] score display
+- [ ] custom mode
+- [x] link colours
+- [x] new record
+- [ ] lives

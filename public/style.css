@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Varela+Round&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    background: #4B0D91;
+    background: linear-gradient(180deg,rgba(75, 13, 145, 1) 0%, rgba(97, 19, 156, 1) 100%);
+    font-family: "Nunito", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Varela Round, serif;
+}
+
+a:link:not(.nav-link, .btn, .dropdown-item, .page-link), 
+a:visited:not(.nav-link, .btn, .dropdown-item, .page-link) {
+    text-decoration: none;
+    color: #00ced1;
+    transition: color 0.1s;
+}
+
+a:hover:not(.nav-link, .btn, .dropdown-item, .page-link) {
+    color: rgb(0, 128, 128);
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#score-container {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    text-align: right;
+    font-size: 40pt;
+
+}
+#score-timer {
+    display: none;
+}
+#score-stars {
+    display: none;
+}
+
+#dim {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #0f0d0d90;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+#menu-container {
+    position: absolute;
+    left: 75px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    max-width: 600px;
+}
+
+.button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #a56be7;
+    font-family: "Nunito", sans-serif;
+    font-size: 12pt;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    transition: background-color 0.05s linear;
+}
+.button:hover {
+    background-color: #bf9de5;
+}
+.button:active {
+    background-color: #ccb2e7;
+}
+
+#scoretable {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+#scoretable td {
+    text-align: center;
+    border: 1px solid #55555590;
+}
+.scoretable-data-td {
+    width: 35%;
+}
+
+.scoretable-header {
+    font-size: 28pt;
+}
+.scoretable-data {
+    font-size: 21pt;
+}
+
+.scoretable-button {
+    margin: 10px 5px;
+    width: calc(90% - 10px);
+}
+
+#debug-info {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+}
+
+#stats {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: small;
+}
+
+.debug {
+    display: none;
+}
+
+.new-record {
+    font-size: 26px;
+    font-weight: bold;
+    color: deeppink;
+}
+
+.wavy {
+    animation: wavy 1.3s ease infinite, 2s linear 1s infinite hello;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.wavy:not(:first-child) {
+    background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 1000px 100px;
+}
+
+@keyframes wavy {
+0% {
+    top: 0px;
+}
+50% {
+    top: -15px;
+}
+100% {
+    top: 0px;
+}
+}
+
+@keyframes hello {
+    0% { background-position-x: 0%; }
+    100% {background-position-x: 1000px;}
+}

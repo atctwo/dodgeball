@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <title>dodgeball</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="pixi-container"></div>
+    </div>
+
+    <div id="score-container">
+        <div id="score-timer"><span id="score-timer-value">0</span> ⏱️</div>
+        <div id="score-stars"><span id="score-stars-value">0</span> ⭐</div>
+    </div>
+
+    <div id="dim"></div>
+
+    <div id="menu-container">
+
+        <div class="menu" id="menu-main">
+            <h1>Dodge The Spiked Balls</h1>
+            <p>
+                A clone of the minigame from <cite>Nintendo Switch 2 Welcome Tour</cite>
+            </p>
+            <table id="scoretable">
+            <tr>
+                <td></td>
+                <td class="scoretable scoretable-header">⏱️</td>
+                <td class="scoretable scoretable-header">⭐</td>
+            </tr>
+            <tr>
+                <td id="btn-level-1"><button class="button scoretable-button" onclick="ext_game_load(1)">Level 1</button></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-time-lvl-1">--</div></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-stars-lvl-1">--</div></td>
+            </tr>
+            <tr>
+                <td id="btn-level-2"><button class="button scoretable-button" onclick="ext_game_load(2)">Level 2</button></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-time-lvl-2">--</div></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-stars-lvl-2">--</div></td>
+            </tr>
+            <tr>
+                <td id="btn-level-3"><button class="button scoretable-button" onclick="ext_game_load(3)">Level 3</button></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-time-lvl-3">--</div></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-stars-lvl-3">--</div></td>
+            </tr>
+            <tr>
+                <td id="btn-level-4"><button class="button scoretable-button" onclick="ext_game_load(4)">Level 4</button></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-time-lvl-4">--</div></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-stars-lvl-4">--</div></td>
+            </tr>
+            <tr>
+                <td id="btn-level-5"><button class="button scoretable-button" onclick="ext_game_load(5)">Level 5</button></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-time-lvl-5">--</div></td>
+                <td class="scoretable-data-td"><div class="scoretable scoretable-data" id="score-stars-lvl-5">--</div></td>
+            </tr>
+            </table>
+            <br><br>
+            <button class="button">Custom Mode</button>
+            <button class="button" onclick="switch_menu('about')">About Game</button><br>
+            <div class="debug">
+                <button class="button" onclick="switch_menu()">Hide Menu Overlay</button>
+                <button class="button" onclick="ext_game_resume();">Start with default settings</button>
+            </div>
+        </div>
+
+        <div class="menu" id="menu-about">
+            <h1>About</h1>
+            <p>
+                Welcome to <cite>Dodge the Spiked Balls</cite>.  This is a blatant clone of the minigame of the same name from 
+                <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_2_Welcome_Tour"><cite>Nintendo Switch 2 Welcome Tour</cite></a>.
+                I decided to make this because I thought that it would be fun (and within my ability) to recreate in a weekend.
+                It's not 100% perfect compared to the base game but it feels pretty similar (and I think it's still fun either way!).
+            </p>
+            <p>I hope you enjoy it!</p>
+
+            <h3>How to Play</h3>
+            <p>
+                When the game starts, move your cursor around to move the little UFO friend.  Try to avoid the spiked balls
+                that fall from the top of the screen, while collecting the stars.
+            </p>
+            <p>
+                For each level, the game will record your longest survival time and most amount of stars collected.  You can
+                also run a game with custom rules if you want!
+            </p>
+
+            <h3>Credits</h3>
+            <p>
+                <ul>
+                    <li>Created using <a href="https://pixijs.com/">PixiJS</a></li>
+                    <li>Circular collision detection method from <a href="https://www.jeffreythompson.org/collision-detection/circle-circle.php">Jeffrey Thompson</a></li>
+                    <li>Performance monitoring performed using <a href="https://github.com/Prozi/pixi-stats">pixi-stats</a></li>
+                    <li>Explosion sound effect by <a href="https://pixabay.com/users/soundreality-31074404/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=343683">Jurij</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=343683">Pixabay</a></li>
+                    <li>Star sound effect by <a href="https://pixabay.com/users/benkirb-8692052/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=268901">Benjamin Adams</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=268901">Pixabay</a></li>
+                </ul>
+            </p>
+
+            <p>Made by alex (<a href="https://atctwo.net">atctwo</a>) in june 2025 :3</p>
+
+            <button class="button" onclick="switch_menu('main')">Main Menu</button>
+        </div>
+
+        <div class="menu" id="menu-pause">
+            <h1>Paused</h1>
+            <button class="button" onclick="ext_game_resume();">Resume</button>
+            <button class="button" onclick="ext_game_quit();">Quit</button>
+        </div>
+
+        <div class="menu" id="menu-end">
+            <h1>Game Over</h1>
+            <p class="new-record" id="new-record-time">⏱️ New Time Record!</p>
+            <p class="new-record" id="new-record-stars">⭐ New Star Record!</p>
+            <button class="button" onclick="ext_game_resume();">Restart</button>
+            <button class="button" onclick="ext_game_quit();">Back to Main Menu</button>
+        </div>
+
+        <div class="menu" id="menu-secret">
+            <h1>Secret Menu</h1>
+            <p>
+                aha!  you found my silly secret menu!  well done for finding this, it must have taken some clever
+                reverse engineering.  unless you looked at the source code on github or something, i guess that
+                counts but it doesn't feel as hackery.
+            </p>
+            <p>
+                either way, here's your prize for hacking my game!  get ready!!! here it is!!!
+            </p>
+            <img src="assets/002.jpg" width="400px" alt="picture of my dog"><br><br>
+            <button class="button" onclick="ext_game_load(0)">Daisy Mode</button>
+        </div>
+
+    </div>
+
+    <div class="debug" id="debug-info">
+        This game is a WIP!  so it probably has bugs and is <b>very</b> unfinished.  press <kbd>R</kbd> to start!!!
+    </div>
+
+    <script type="module" src="./bundle.min.js"></script>
+</body>
+</html>
