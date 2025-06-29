@@ -130,6 +130,23 @@ a:hover:not(.nav-link, .btn, .dropdown-item, .page-link) {
     font-size: small;
 }
 
+.custom-table {
+    width: 100%;
+    table-layout: auto;
+}
+
+.custom-table > tbody > tr > td {
+    padding: 5px;
+}
+
+.custom-table > tbody > tr > td > input {
+    width: 60px;
+    padding: 7px;
+    border: 0px solid black;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
 .debug {
     display: none;
 }

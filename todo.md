@@ -5,7 +5,8 @@
 - [ ] red ball
 - [x] score tracking
 - [x] score display
-- [ ] custom mode
+- [x] custom mode
 - [x] link colours
 - [x] new record
 - [ ] lives
+- [ ] delete scores?

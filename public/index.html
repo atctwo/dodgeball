@@ -60,7 +60,7 @@
             </tr>
             </table>
             <br><br>
-            <button class="button">Custom Mode</button>
+            <button class="button" onclick="switch_menu('custom')">Custom Mode</button>
             <button class="button" onclick="switch_menu('about')">About Game</button><br>
             <div class="debug">
                 <button class="button" onclick="switch_menu()">Hide Menu Overlay</button>
@@ -102,6 +102,75 @@
             <p>Made by alex (<a href="https://atctwo.net">atctwo</a>) in june 2025 :3</p>
 
             <button class="button" onclick="switch_menu('main')">Main Menu</button>
+        </div>
+
+        <div class="menu" id="menu-custom">
+            <h1>Custom Mode</h1>
+            <p>Test the limits of your skill (and this game) by creating your own game with custom rules!</p>
+            <p>Hover over the names of each setting to see a description of what they do!</p>
+
+            <form id="custom-parameters">
+                <h2>Object Spawning</h2>
+                <table class="custom-table">
+                    <tr>
+                        <td><label for="ball_time" title="How often the game will attempt to spawn balls (in milliseconds)">Ball Spawn Timer</label></td>
+                        <td><input type="number" name="ball_time" id="ball_time" min="0" step="1" value="50"></td>
+
+                        <td><label for="star_time" title="How often the game will attempt to spawn stars (in milliseconds)">Star Spawn Timer</label></td>
+                        <td><input type="number" name="star_time" id="star_time" min="0" step="1" value="200"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ball_chance" title="When attempting to spawn a ball, what is the chance that it succeeds?  (0 means never, 1 means always)">Ball Spawn Chance</label></td>
+                        <td><input type="number" name="ball_chance" id="ball_chance" min="0" step="0.1" value="0.7"></td>
+
+                        <td><label for="star_chance" title="When attempting to spawn a star, what is the chance that it succeeds?  (0 means never, 1 means always)">Star Spawn Chance</label></td>
+                        <td><input type="number" name="star_chance" id="star_chance" min="0" step="0.1" value="0.5"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ball_chance_big" title="When spawning a ball, what is the chance that it will be big?">Ball Chance: Big</label></td>
+                        <td><input type="number" name="ball_chance_big" id="ball_chance_big" min="0" step="0.0001" value="0.003"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ball_chance_green" title="When spawning a ball, what is the chance that it will instead be a series of green balls?">Ball Chance: Green</label></td>
+                        <td><input type="number" name="ball_chance_green" id="ball_chance_green" min="0" step="0.0001" value="0.003"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ball_chance_red" title="When spawning a ball, what is the chance that it will be red?">Ball Chance: Red</label></td>
+                        <td><input type="number" name="ball_chance_red" id="ball_chance_red" min="0" step="0.0001" value="0.003"></td>
+                    </tr>
+                </table>
+
+                <h2>Object Movement</h2>
+                <table class="custom-table">
+                    <tr>
+                        <td><label for="ball_init_velocity_scale" title="Value corresponding to the initial speed of objects">Object Initial Velocity Scale</label></td>
+                        <td><input type="number" name="ball_init_velocity_scale" id="ball_init_velocity_scale" min="0" step="0.1" value="2"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ball_accel_x" title="Acceleration of objects in the x axis">Object Acceleration (X)</label></td>
+                        <td><input type="number" name="ball_accel_x" id="ball_accel_x" min="0" step="0.001" value="0.005"></td>
+
+                        <td><label for="ball_accel_y" title="Acceleration of objects in the y axis">Object Acceleration (Y)</label></td>
+                        <td><input type="number" name="ball_accel_y" id="ball_accel_y" min="0" step="0.05" value="0.1"></td>
+                    <tr>
+
+                    <tr>
+                        <td><label for="ball_accel_accel_x" title="Amount by which x-axis acceleration changes each frame">Object Acceleration Change Over Time (X)</label></td>
+                        <td><input type="number" name="ball_accel_accel_x" id="ball_accel_accel_x" value="0"></td>
+
+                        <td><label for="ball_accel_accel_y" title="Amount by which y-axis acceleration changes each frame (scaled up by 1000 because otherwise the number would be really small!)">Object Acceleration Change Over Time (Y) * 1000</label></td>
+                        <td><input type="number" name="ball_accel_accel_y" id="ball_accel_accel_y" value="0.00075"></td>
+                    </tr>
+                </table><br>
+            </form>
+
+            <button class="button" onclick="ext_game_start_custom();">Start!</button>
+            <button class="button" onclick="ext_game_quit();">Back to Main Menu</button>
         </div>
 
         <div class="menu" id="menu-pause">

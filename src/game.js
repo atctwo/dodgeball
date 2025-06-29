@@ -45,16 +45,19 @@ let obj_friend_particles;   // container for friend particles
 let obj_friend_particles2 = []; // array of friend particles
 
 // gameplay settings
-let ball_threshold = 50;                // amount of time between balls chances
-let ball_chance = 0.7;                  // chance of a ball spawning
-let ball_chance_big = 0.003;            // chance a ball will be a big ball
-let star_threshold = 200;               // amount of time between stars chances
-let star_chance = 0.5;                  // chance of a star spawning
-let ball_init_velocity_scale = 2;     // multiplier for starting velocity
-let ball_accel_x = 0.005;               // x-axis acceleration for balls
-let ball_accel_y = 0.1;                // y-axis acceleration for balls
-let ball_accel_accel_x = 0;
-let ball_accel_accel_y = 7.5e-7;
+let settings = {
+    ball_time: 50,                // amount of time between balls chances
+    ball_chance: 0.7,                  // chance of a ball spawning
+    ball_chance_big: 0.003,            // chance a ball will be a big ball
+    star_time: 200,               // amount of time between stars chances
+    star_chance: 0.5,                  // chance of a star spawning
+    ball_init_velocity_scale: 2,     // multiplier for starting velocity
+    ball_accel_x: 0.005,               // x-axis acceleration for balls
+    ball_accel_y: 0.1,                // y-axis acceleration for balls
+    ball_accel_accel_x: 0,
+    ball_accel_accel_y: 7.5e-4,
+}
+const settings_defaults = structuredClone(settings);
 
 // controls settings
 // let mouse_sensitivity = 1.7; // firefox
@@ -299,8 +302,8 @@ export function game_make_ball(type) {
     // add movement params
     let angle = getRandomArbitrary(-0.2, 0.2);
     let velocity = [
-        Math.asin(angle) * ball_init_velocity_scale,
-        Math.acos(angle) * ball_init_velocity_scale,
+        Math.asin(angle) * settings.ball_init_velocity_scale,
+        Math.acos(angle) * settings.ball_init_velocity_scale,
     ]
     // console.debug(`velocity: ${velocity}, angle: ${angle}`);
 
@@ -342,61 +345,32 @@ function game_make_explosion(x, y) {
 
 }
 
-export function game_set_settings(settings) {
+export function game_default_settings() {
+    settings = structuredClone(settings_defaults);
+}
 
-    console.log("setting game parameters", settings);
+export function game_set_settings(new_settings) {
 
-    // ball time
-    if (Object.keys(settings).includes("ball_time")) {
-        console.log(settings.ball_time);
-        ball_threshold = settings.ball_time;
+    console.log("setting game parameters", new_settings);
+
+    // for each k,v in settings object
+    for (let [name, value] of Object.entries(new_settings)) {
+
+        // check if new setting name exists in settings
+        if (Object.keys(settings).includes(name)) {
+
+            // set setting
+            settings[name] = value;
+            console.log("setting", name, "=", value);
+
+        }
+
     }
 
-    // ball chance
-    if (Object.keys(settings).includes("ball_chance")) {
-        ball_chance = settings.ball_chance;
-    }
+}
 
-    // ball chance
-    if (Object.keys(settings).includes("ball_chance_big")) {
-        ball_chance_big = settings.ball_chance_big;
-    }
-
-    // star time
-    if (Object.keys(settings).includes("star_time")) {
-        star_threshold = settings.star_time;
-    }
-
-    // star chance
-    if (Object.keys(settings).includes("star_chance")) {
-        star_chance = settings.star_chance;
-    }
-
-    // ball velocity init scale
-    if (Object.keys(settings).includes("ball_init_velocity_scale")) {
-        ball_init_velocity_scale = settings.ball_init_velocity_scale;
-    }
-
-    // ball acceleration x
-    if (Object.keys(settings).includes("ball_accel_x")) {
-        ball_accel_x = settings.ball_accel_x;
-    }
-
-    // ball acceleration y
-    if (Object.keys(settings).includes("ball_accel_y")) {
-        ball_accel_y = settings.ball_accel_y;
-    }
-
-    // ball acceleration x
-    if (Object.keys(settings).includes("ball_accel_accel_x")) {
-        ball_accel_accel_x = settings.ball_accel_accel_x;
-    }
-
-    // ball acceleration y
-    if (Object.keys(settings).includes("ball_accel_accel_y")) {
-        ball_accel_accel_y = settings.ball_accel_accel_y;
-    }
-
+export function game_get_settings() {
+    return settings;
 }
 
 export async function game_setup() {
@@ -491,11 +465,11 @@ export async function game_setup() {
             // make balls
             //
             last_ball_time += time.deltaMS
-            if (last_ball_time > ball_threshold) {
-                if (getRandomArbitrary(0, 1) < ball_chance) {
+            if (last_ball_time > settings.ball_time) {
+                if (getRandomArbitrary(0, 1) < settings.ball_chance) {
 
                     // change to make a big ball
-                    if (getRandomArbitrary(0, 1) < ball_chance_big)
+                    if (getRandomArbitrary(0, 1) < settings.ball_chance_big)
                         game_make_ball("big");
 
                     // make a normal ball
@@ -505,8 +479,8 @@ export async function game_setup() {
             }
 
             last_star_time += time.deltaMS
-            if (last_star_time > star_threshold) {
-                if (getRandomArbitrary(0, 1) > star_chance) {
+            if (last_star_time > settings.star_time) {
+                if (getRandomArbitrary(0, 1) > settings.star_chance) {
                     game_make_ball("star");
                 }
                 last_star_time = 0;
@@ -535,8 +509,8 @@ export async function game_setup() {
                 let old_velocity = ball.velocity;
 
                 // calc new velocity due to acceleration
-                let accel_x = ball_accel_x + (ball_accel_accel_x * game_timer);
-                let accel_y = ball_accel_y + (ball_accel_accel_y * game_timer);
+                let accel_x = settings.ball_accel_x + (settings.ball_accel_accel_x * game_timer);
+                let accel_y = settings.ball_accel_y + ((settings.ball_accel_accel_y / 1000) * game_timer);
                 ball.velocity[0] += accel_x * time.deltaTime * Math.sign(old_velocity[0]);
                 ball.velocity[1] += accel_y * time.deltaTime;
 

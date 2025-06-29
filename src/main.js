@@ -5,6 +5,7 @@ import * as ui_exports from "./ui"
 Object.assign(globalThis, ui_exports);
 
 let current_level = 0;
+let last_menu = "main";
 
 //---------------------------------------------
 // mouse move event
@@ -167,10 +168,10 @@ window.addEventListener("resize", e => {
 //---------------------------------------------
 
 window.ext_game_load = (level) => {
-    current_level = level;
-    game_set_settings(level_settings[level]);
-    game_set_level(level);
-    ext_game_resume();
+    current_level = level;                      // store current level
+    game_default_settings();                    // restore all settings to default
+    game_set_settings(level_settings[level]);   // set level-specific settings
+    ext_game_resume();                          // start game!
 }
 
 let ext_game_pause = () => {
@@ -208,6 +209,39 @@ window.ext_game_resume = () => {
 window.ext_game_quit = () => {
     game_end();          // end game
     switch_menu("main"); // return to main menu
+}
+
+window.ext_game_start_custom = () => {
+
+    // set custom settings
+    let new_settings = {};
+
+    // for each setting value
+    Object.keys(game_get_settings()).forEach(name => {
+
+        // get element for this setting
+        let el = document.getElementById(name);
+
+        console.log(el)
+
+        // if element exists
+        if (el) {
+
+            console.log("\t", el.value);
+            console.log("\t", parseFloat(el.value));
+
+            // get value
+            new_settings[name] = parseFloat(el.value);
+
+        }
+
+    });
+
+    game_set_settings(new_settings);
+
+    // start game!
+    ext_game_resume();
+
 }
 
 
@@ -269,7 +303,6 @@ function updateText(el_id){
           h1.innerHTML = h1.innerText
             .split("")
             .map(letter => {
-              console.log(letter);
               return `<span>` + letter + `</span>`;
             })
             .join("");
