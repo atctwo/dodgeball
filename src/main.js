@@ -17,39 +17,53 @@ const level_settings = [
         ball_time: 1000,
         ball_chance: 0,
         star_time: 50,
-        star_chance: 0.5
+        star_chance: 0.5,
+        ball_chance_big: 0,
+        ball_chance_green: 0,
+        ball_chance_red: 0
     },
 
     { // level 1
         ball_time: 200,
-        ball_chance: 0.4,
+        ball_chance: 0.6,
         ball_chance_big: 0,
         star_time: 500,
-        star_chance: 0.6
+        star_chance: 0.6,
+        ball_chance_big: 0,
+        ball_chance_green: 0,
+        ball_chance_red: 0,
+        ball_accel_y: 0.08
     },
 
     { // level 2
         ball_time: 100,
-        ball_chance: 0.7,
-        ball_chance_big: 0.003,
-        star_time: 200,
-        star_chance: 0.4
+        ball_chance: 0.5,
+        ball_chance_big: 0.07,
+        star_time: 400,
+        star_chance: 0.6,
+        ball_chance_green: 0,
+        ball_chance_red: 0,
+        ball_accel_y: 0.09
     },
 
     { // level 3
         ball_time: 50,
         ball_chance: 0.7,
-        ball_chance_big: 0.004,
-        star_time: 200,
-        star_chance: 0.5
+        ball_chance_big: 0.008,
+        star_time: 400,
+        star_chance: 0.5,
+        ball_chance_red: 0
     },
 
     { // level 4
-        ball_time: 50,
-        ball_chance: 0.9,
-        ball_chance_big: 0.005,
+        ball_time: 40,
+        ball_chance: 0.95,
+        ball_chance_big: 0.008,
         star_time: 200,
-        star_chance: 0.5
+        star_chance: 0.7,
+        ball_big_delay: 7500,
+        ball_green_delay: 15000,
+        ball_red_delay: 25000
     },
 
     { // level 5
@@ -57,7 +71,10 @@ const level_settings = [
         ball_chance: 0.9,
         ball_chance_big: 0.05,
         star_time: 100,
-        star_chance: 0.7
+        star_chance: 0.7,
+        ball_big_delay: 5000,
+        ball_green_delay: 6000,
+        ball_red_delay: 7000
     },
 ]
 

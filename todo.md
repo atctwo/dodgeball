@@ -11,4 +11,4 @@
 - [x] new record
 - [x] delete scores?
 - [x] custom mode preset buttons
-- [ ] tune levels
+- [x] tune levels

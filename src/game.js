@@ -63,7 +63,7 @@ let settings = {
     ball_accel_y: 0.1,                // y-axis acceleration for balls
     ball_accel_accel_x: 0,
     ball_accel_accel_y: 7.5e-4,
-    ball_big_accel_y: 0.05,
+    ball_big_accel_y: 0.03,
     ball_green_accel_y: 0.03,
     ball_red_accel_y: 0.2,
     ball_green_spawn_delay: 500,
