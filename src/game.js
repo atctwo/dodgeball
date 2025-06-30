@@ -256,9 +256,11 @@ export function game_end() {
     game_paused = false;
 
     // stop timers
-    timers.forEach((t) => {
+    console.log("stopping timers", timers);
+    timers.forEach((t, v) => {
         clearTimeout(t);
     });
+    timers.splice(0, timers.length);
 
     // call event handlers
     evt_handlers.gameend.forEach(handler => {
@@ -376,15 +378,13 @@ export function game_make_green_balls() {
     
     for (let i = 0; i < num*2; i++) {
 
-        setTimeout(() => {
-            ((j) => {
-                let ball = game_make_ball("green");
-                ball.position.x = tex_ball_green.width * ( (j < num) ? j : (num - (j - num) - 1));
-                // ball.position.y = (-1.5 * tex_ball_green.height * j) - tex_ball_green.height;
-                ball.position.y = - tex_ball_green.height;
-            })(i)
+        let id = setTimeout(() => {
+            let ball = game_make_ball("green");
+            ball.position.x = tex_ball_green.width * ( (i < num) ? i : (num - (i - num) - 1));
+            // ball.position.y = (-1.5 * tex_ball_green.height * i) - tex_ball_green.height;
+            ball.position.y = - tex_ball_green.height;
         }, settings.ball_green_spawn_delay * i);
-
+        timers.push(id);
     }
 
 }
