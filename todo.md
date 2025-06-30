@@ -3,6 +3,7 @@
 - [ ] big ball
 - [ ] green ball
 - [ ] red ball
+- [ ] delayed start times for big, green, red
 - [x] score tracking
 - [x] score display
 - [x] custom mode

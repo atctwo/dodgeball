@@ -28,6 +28,9 @@ let last_star_time = 0;     // time since last ball
 
 let tex_friend;             // texture for friend
 let tex_ball;               // texture for ball
+let tex_ball_big;           // texture for ball
+let tex_ball_green;         // texture for ball
+let tex_ball_red;           // texture for ball
 let tex_star;               // texture for stars
 let tex_explosion;          // texture for explosion
 let tex_particle;           // texture for the trail left behind
@@ -284,8 +287,19 @@ export function game_make_ball(type) {
     switch(type) {
         default:
         case "ball":
-        case "big":
             obj_ball = new GifSprite(tex_ball);
+            break;
+            
+        case "big":
+            obj_ball = new GifSprite(tex_ball_big);
+            break;
+            
+        case "green":
+            obj_ball = new GifSprite(tex_ball_green);
+            break;
+            
+        case "red":
+            obj_ball = new GifSprite(tex_ball_red);
             break;
 
         case "star":
@@ -294,10 +308,6 @@ export function game_make_ball(type) {
     };
     obj_ball.anchor.set(0.5);
     obj_ball.position.set(getRandomInt(0, app.screen.width), -(tex_ball.height)*3);
-    
-    if (type == "big") {
-        obj_ball.scale.set(5);
-    }
 
     // add movement params
     let angle = getRandomArbitrary(-0.2, 0.2);
@@ -404,7 +414,10 @@ export async function game_setup() {
     console.log("loading assets...");
 
     tex_friend = await Assets.load("/assets/friend.gif");
-    tex_ball = await Assets.load("/assets/ball.gif");
+    tex_ball = await Assets.load("/assets/ball2.gif");
+    tex_ball_big = await Assets.load("/assets/ball2_big.gif");
+    tex_ball_green = await Assets.load("/assets/ball2_green.gif");
+    tex_ball_red = await Assets.load("/assets/ball2_red.gif");
     // tex_ball = await Assets.load("/assets/MKT_Icon_Bob-omb.png");
     // tex_ball.scaleX = 0.5;
     // tex_ball.scaleY = 0.5;
@@ -533,7 +546,7 @@ export async function game_setup() {
                     // friend_bounds.x + friend_bounds.width > ball_bounds.x &&
                     // friend_bounds.y < ball_bounds.y + ball_bounds.height &&
                     // friend_bounds.y + friend_bounds.height > ball_bounds.y
-                    dist <= ((tex_ball.height*ball_r_multiplier*ball.obj.scale.y)/2) + (tex_friend.height/2)
+                    dist <= ((ball.obj.height*ball_r_multiplier*ball.obj.scale.y)/2) + (obj_friend.height/2)
                 ) {
                     if ((ball.type == "ball" || ball.type == "big") && !ball.exploded) {
                         game_make_explosion(friend_bounds.x + friend_bounds.width / 2, friend_bounds.y + friend_bounds.height / 2);
