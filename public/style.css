@@ -73,6 +73,15 @@ a:hover:not(.nav-link, .btn, .dropdown-item, .page-link) {
     max-width: 600px;
 }
 
+#custom-parameters {
+    overflow-y: auto;
+    scrollbar-color: rgba(255, 255, 255, 0.175) transparent;
+    max-height: 600px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #0f0d0d49;
+}
+
 .button {
     margin: 5px;
     padding: 10px;

@@ -155,6 +155,31 @@
                     </tr>
                 </table>
 
+                <h2>Spawn Delay</h2>
+                <table class="custom-table">
+                    <tr>
+                        <td><label for="ball_delay" title="How long the game will wait before spawning regular balls (in milliseconds)">Ball Spawn Delay</label></td>
+                        <td><input type="number" name="ball_delay" id="ball_delay" min="0" step="100" value="3000"></td>
+                    
+                        <td><label for="star_delay" title="How long the game will wait before spawning stars (in milliseconds)">Star Spawn Delay</label></td>
+                        <td><input type="number" name="star_delay" id="star_delay" min="0" step="100" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="ball_big_delay" title="How long the game will wait before spawning big balls (in milliseconds)">Big Ball Spawn Delay</label></td>
+                        <td><input type="number" name="ball_big_delay" id="ball_big_delay" min="0" step="100" value="15000"></td>
+                    
+                        <td><label for="ball_red_delay" title="How long the game will wait before spawning red balls (in milliseconds)">Red Ball Spawn Delay</label></td>
+                        <td><input type="number" name="ball_red_delay" id="ball_red_delay" min="0" step="100" value="35000"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="ball_green_delay" title="How long the game will wait before spawning a green ball wave (in milliseconds)">Green Ball Spawn Delay</label></td>
+                        <td><input type="number" name="ball_green_delay" id="ball_green_delay" min="0" step="100" value="25000"></td>
+
+                        <td><label for="ball_green_spawn_delay" title="Amount of time between each ball in a green ball wave being spawned (in milliseconds)">Intra-Green Ball Delay</label></td>
+                        <td><input type="number" name="ball_green_spawn_delay" id="ball_green_spawn_delay" min="0" step="100" value="500"></td>
+                    </tr>
+                </table>
+
                 <h2>Object Movement</h2>
                 <table class="custom-table">
                     <tr>
@@ -171,6 +196,19 @@
                     <tr>
 
                     <tr>
+                        <td><label for="ball_big_accel_y" title="Acceleration of big balls in the y axis">Big Ball Acceleration</label></td>
+                        <td><input type="number" name="ball_big_accel_y" id="ball_big_accel_y" min="0" step="0.001" value="0.05"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="ball_green_accel_y" title="Acceleration of green balls in the y axis">Green Ball Acceleration</label></td>
+                        <td><input type="number" name="ball_green_accel_y" id="ball_green_accel_y" min="0" step="0.001" value="0.03"></td>
+
+                        <td><label for="ball_red_accel_y" title="Acceleration of red balls in the y axis">Red Ball Acceleration</label></td>
+                        <td><input type="number" name="ball_red_accel_y" id="ball_red_accel_y" min="0" step="0.001" value="0.2"></td>
+                    </tr>
+
+                    <tr>
                         <td><label for="ball_accel_accel_x" title="Amount by which x-axis acceleration changes each frame">Object Acceleration Change Over Time (X)</label></td>
                         <td><input type="number" name="ball_accel_accel_x" id="ball_accel_accel_x" value="0"></td>
 
@@ -178,7 +216,7 @@
                         <td><input type="number" name="ball_accel_accel_y" id="ball_accel_accel_y" value="0.00075"></td>
                     </tr>
                 </table><br>
-            </form>
+            </form><br>
 
             <button class="button" onclick="ext_game_start_custom();">Start!</button>
             <button class="button" onclick="ext_game_quit();">Back to Main Menu</button>
