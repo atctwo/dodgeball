@@ -16,7 +16,7 @@ const builder = async () => {
       }),
       copy({
         assets: [
-          { from: "./public/*", to: "./" },
+          { from: "./public/**", to: "./" },
           { from: "./index.html", to: "./index.html" },
         ],
       }),
