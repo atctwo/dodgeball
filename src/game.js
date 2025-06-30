@@ -20,6 +20,8 @@ let game_active = false;    // flag to indicate a game is being played
 let game_paused = false;    // flag to indicate a game is paused
 let game_loaded = false;    // flag to store game load state
 
+let timers = [];            // array to store handlers to timeouts
+
 let current_level = 0;
 let game_timer = 0;         // how long the current game has been going on for (in ms)
 let game_stars = 0;
@@ -51,9 +53,9 @@ let obj_friend_particles2 = []; // array of friend particles
 let settings = {
     ball_time: 50,                // amount of time between balls chances
     ball_chance: 0.7,                  // chance of a ball spawning
-    ball_chance_big: 0.013,            // chance a ball will be a big ball
-    ball_chance_green: 0.013,            // chance a ball will be a green ball
-    ball_chance_red: 0.013,            // chance a ball will be a red ball
+    ball_chance_big: 0.003,            // chance a ball will be a big ball
+    ball_chance_green: 0.003,            // chance a ball will be a green ball
+    ball_chance_red: 0.003,            // chance a ball will be a red ball
     star_time: 200,               // amount of time between stars chances
     star_chance: 0.5,                  // chance of a star spawning
     ball_init_velocity_scale: 3,     // multiplier for starting velocity
@@ -65,6 +67,11 @@ let settings = {
     ball_green_accel_y: 0.03,
     ball_red_accel_y: 0.2,
     ball_green_spawn_delay: 500,
+    ball_delay: 3000,
+    star_delay: 0,
+    ball_big_delay: 15000,
+    ball_green_delay: 25000,
+    ball_red_delay: 35000,
 }
 const settings_defaults = structuredClone(settings);
 
@@ -200,6 +207,19 @@ export function game_start() {
         scoreTimer.style.display = "block";
         scoreStars.style.display = "block";
         scoreStarsValue.innerText = game_stars;
+
+        // start ball timers
+        timers.push(setTimeout(() => {
+            game_make_ball("big");
+        }, settings.ball_big_delay));
+
+        timers.push(setTimeout(() => {
+            game_make_green_balls();
+        }, settings.ball_green_delay));
+
+        timers.push(setTimeout(() => {
+            game_make_ball("red");
+        }, settings.ball_red_delay));
         
     }
     
@@ -231,6 +251,11 @@ export function game_end() {
     // clear game flags
     game_active = false;
     game_paused = false;
+
+    // stop timers
+    timers.forEach((t) => {
+        clearTimeout(t);
+    });
 
     // call event handlers
     evt_handlers.gameend.forEach(handler => {
@@ -514,25 +539,26 @@ export async function game_setup() {
                 if (getRandomArbitrary(0, 1) < settings.ball_chance) {
 
                     // chance to make a big ball
-                    if (getRandomArbitrary(0, 1) < settings.ball_chance_big)
+                    if (getRandomArbitrary(0, 1) < settings.ball_chance_big && game_timer > settings.ball_big_delay)
                         game_make_ball("big");
 
                     // change to make a green ball
-                    else if (getRandomArbitrary(0, 1) < settings.ball_chance_green)
+                    else if (getRandomArbitrary(0, 1) < settings.ball_chance_green && game_timer > settings.ball_green_delay)
                         game_make_green_balls();
 
                     // change to make a red ball
-                    else if (getRandomArbitrary(0, 1) < settings.ball_chance_red)
+                    else if (getRandomArbitrary(0, 1) < settings.ball_chance_red && game_timer > settings.ball_red_delay)
                         game_make_ball("red");
 
                     // make a normal ball
-                    else game_make_ball("ball");
+                    else if (game_timer > settings.ball_delay)
+                        game_make_ball("ball");
                 }
                 last_ball_time = 0;
             }
 
             last_star_time += time.deltaMS
-            if (last_star_time > settings.star_time) {
+            if (last_star_time > settings.star_time && game_timer > settings.star_delay) {
                 if (getRandomArbitrary(0, 1) > settings.star_chance) {
                     game_make_ball("star");
                 }
