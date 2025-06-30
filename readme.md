@@ -6,6 +6,8 @@ Hello!  This is a web-based clone of the minigame *Dodge The Spiked Balls* from 
 
 I decided to make this when I had some time off, and I wanted to do a short project that would be within my ability.  The game is web-based so that it can run on multiple platforms without modification (and it doesn't really need the performance afforded by native game engines).  I ended up using PixiJS for the first time, which was a fun learning experience!
 
+A live build of the game is available at [dodgeball.atctwo.net](https://dodgeball.atctwo.net/).
+
 # Building
 First, make sure `npm` and `node` are installed.  Install the dependencies by running `npm install` in the root of this repo.
 
