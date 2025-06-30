@@ -26,7 +26,6 @@ const level_settings = [
     { // level 1
         ball_time: 200,
         ball_chance: 0.6,
-        ball_chance_big: 0,
         star_time: 500,
         star_chance: 0.6,
         ball_chance_big: 0,
