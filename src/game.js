@@ -51,6 +51,7 @@ let obj_friend_particles2 = []; // array of friend particles
 
 // gameplay settings
 let settings = {
+    // engine settings
     ball_time: 50,                // amount of time between balls chances
     ball_chance: 0.7,                  // chance of a ball spawning
     ball_chance_big: 0.003,            // chance a ball will be a big ball
@@ -72,15 +73,15 @@ let settings = {
     ball_big_delay: 15000,
     ball_green_delay: 25000,
     ball_red_delay: 35000,
+
+    // gameplay settings
+    mouse_sensitivity: 1.0,
 }
 const settings_defaults = structuredClone(settings);
 
-// controls settings
-// let mouse_sensitivity = 1.7; // firefox
-let mouse_sensitivity = 1.0; // chrome
-
 let trail_alpha_decay = 0.05;
 let trail_scale_decay = 0.03;
+
 
 //---------------------------------------------
 // helper funcs
@@ -279,8 +280,8 @@ export function game_move_friend(dx, dy) {
         if (obj_friend) {
 
             let moved = false;
-            let new_x = obj_friend.position.x + dx * mouse_sensitivity;
-            let new_y = obj_friend.position.y + dy * mouse_sensitivity;
+            let new_x = obj_friend.position.x + dx * settings.mouse_sensitivity;
+            let new_y = obj_friend.position.y + dy * settings.mouse_sensitivity;
 
             if (((tex_friend.width/2) <= new_x && new_x <= app.screen.width - (tex_friend.width/2))) {
                 obj_friend.position.x = new_x;

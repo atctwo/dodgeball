@@ -305,6 +305,69 @@ window.ext_custom_preload = (lvl) => {
 
 }
 
+let btn_settings_resume = document.getElementById("btn-settings-resume");
+let btn_settings_menu = document.getElementById("btn-settings-menu");
+
+window.ext_settings = () => {
+
+    // if a game is active, hide the menu button, show the resume button
+    if (game_is_active()) {
+        btn_settings_resume.style.display = "block";
+        btn_settings_menu.style.display = "none";
+    }
+
+    // otherwise, hide the resume button and show the menu button
+    else {
+        btn_settings_resume.style.display = "none";
+        btn_settings_menu.style.display = "block";
+    }
+
+    // finally, switch to settings menu
+    switch_menu("settings");
+
+}
+
+// this code is not good
+window.ext_set_gameplay_setting = (setting) => {
+    console.log("setting gameplay setting", setting);
+
+    // get value
+    let el = document.getElementById(setting);
+    let value = el.value;
+
+    // set game setting
+    game_set_settings({
+        [setting]: value
+    })
+
+    // store in localstorage
+    localStorage.setItem(`setting-${setting}`, value);
+}
+
+window.ext_load_gameplay_setting = (setting) => {
+
+    console.log("loading gameplay setting", setting);
+
+    // load from localstorage
+    let local_value = localStorage.getItem(`setting-${setting}`);
+
+    // if value is null, use default
+    if (local_value == null) {
+        local_value = game_get_default_settings()[setting];
+    }
+
+    // set value
+    let el = document.getElementById(setting);
+    el.value = local_value;
+
+    // set game setting
+    game_set_settings({
+        [setting]: local_value
+    })
+
+
+}
+
 //---------------------------------------------
 // high score handling
 //---------------------------------------------
@@ -392,6 +455,7 @@ game_add_event_listener("gameend", () => {
 //---------------------------------------------
 updateText("new-record-time");
 updateText("new-record-stars");
+ext_load_gameplay_setting("mouse_sensitivity");
 game_setup();
 setTimeout(() => {
     load_scores();
