@@ -51,14 +51,20 @@ let obj_friend_particles2 = []; // array of friend particles
 let settings = {
     ball_time: 50,                // amount of time between balls chances
     ball_chance: 0.7,                  // chance of a ball spawning
-    ball_chance_big: 0.003,            // chance a ball will be a big ball
+    ball_chance_big: 0.013,            // chance a ball will be a big ball
+    ball_chance_green: 0.013,            // chance a ball will be a green ball
+    ball_chance_red: 0.013,            // chance a ball will be a red ball
     star_time: 200,               // amount of time between stars chances
     star_chance: 0.5,                  // chance of a star spawning
-    ball_init_velocity_scale: 2,     // multiplier for starting velocity
+    ball_init_velocity_scale: 3,     // multiplier for starting velocity
     ball_accel_x: 0.005,               // x-axis acceleration for balls
     ball_accel_y: 0.1,                // y-axis acceleration for balls
     ball_accel_accel_x: 0,
     ball_accel_accel_y: 7.5e-4,
+    ball_big_accel_y: 0.05,
+    ball_green_accel_y: 0.03,
+    ball_red_accel_y: 0.2,
+    ball_green_spawn_delay: 500,
 }
 const settings_defaults = structuredClone(settings);
 
@@ -307,14 +313,19 @@ export function game_make_ball(type) {
             break;
     };
     obj_ball.anchor.set(0.5);
-    obj_ball.position.set(getRandomInt(0, app.screen.width), -(tex_ball.height)*3);
+    obj_ball.position.set(getRandomInt(0, app.screen.width), -(obj_ball.height)*3);
 
     // add movement params
-    let angle = getRandomArbitrary(-0.2, 0.2);
-    let velocity = [
-        Math.asin(angle) * settings.ball_init_velocity_scale,
-        Math.acos(angle) * settings.ball_init_velocity_scale,
-    ]
+    let angle = 0;
+    let velocity = [0, settings.ball_init_velocity_scale];
+
+    if (type != "green" && type != "red" && type != "big") {
+        angle = getRandomArbitrary(-0.2, 0.2);
+        let velocity = [
+            Math.asin(angle) * settings.ball_init_velocity_scale,
+            Math.acos(angle) * settings.ball_init_velocity_scale,
+        ]
+    }
     // console.debug(`velocity: ${velocity}, angle: ${angle}`);
 
     // add to world
@@ -326,6 +337,27 @@ export function game_make_ball(type) {
         "exploded": false,
     });
     app.stage.addChild(obj_ball);
+
+    return obj_ball;
+
+}
+
+export function game_make_green_balls() {
+
+    let num = Math.floor(app.screen.width / tex_ball_green.width);
+    
+    for (let i = 0; i < num*2; i++) {
+
+        setTimeout(() => {
+            ((j) => {
+                let ball = game_make_ball("green");
+                ball.position.x = tex_ball_green.width * ( (j < num) ? j : (num - (j - num) - 1));
+                // ball.position.y = (-1.5 * tex_ball_green.height * j) - tex_ball_green.height;
+                ball.position.y = - tex_ball_green.height;
+            })(i)
+        }, settings.ball_green_spawn_delay * i);
+
+    }
 
 }
 
@@ -481,9 +513,17 @@ export async function game_setup() {
             if (last_ball_time > settings.ball_time) {
                 if (getRandomArbitrary(0, 1) < settings.ball_chance) {
 
-                    // change to make a big ball
+                    // chance to make a big ball
                     if (getRandomArbitrary(0, 1) < settings.ball_chance_big)
                         game_make_ball("big");
+
+                    // change to make a green ball
+                    else if (getRandomArbitrary(0, 1) < settings.ball_chance_green)
+                        game_make_green_balls();
+
+                    // change to make a red ball
+                    else if (getRandomArbitrary(0, 1) < settings.ball_chance_red)
+                        game_make_ball("red");
 
                     // make a normal ball
                     else game_make_ball("ball");
@@ -521,9 +561,18 @@ export async function game_setup() {
                 // store old velocity
                 let old_velocity = ball.velocity;
 
+                // determine velocity based on type
+                let base_accel_x = settings.ball_accel_x;
+                let base_accel_y = settings.ball_accel_y;
+                switch(ball.type) {
+                    case "big":     base_accel_y = settings.ball_big_accel_y;       break;
+                    case "green":   base_accel_y = settings.ball_green_accel_y;     break;
+                    case "red":     base_accel_y = settings.ball_red_accel_y;       break;
+                }
+
                 // calc new velocity due to acceleration
-                let accel_x = settings.ball_accel_x + (settings.ball_accel_accel_x * game_timer);
-                let accel_y = settings.ball_accel_y + ((settings.ball_accel_accel_y / 1000) * game_timer);
+                let accel_x = base_accel_x + (settings.ball_accel_accel_x * game_timer);
+                let accel_y = base_accel_y + ((settings.ball_accel_accel_y / 1000) * game_timer);
                 ball.velocity[0] += accel_x * time.deltaTime * Math.sign(old_velocity[0]);
                 ball.velocity[1] += accel_y * time.deltaTime;
 
@@ -548,7 +597,7 @@ export async function game_setup() {
                     // friend_bounds.y + friend_bounds.height > ball_bounds.y
                     dist <= ((ball.obj.height*ball_r_multiplier*ball.obj.scale.y)/2) + (obj_friend.height/2)
                 ) {
-                    if ((ball.type == "ball" || ball.type == "big") && !ball.exploded) {
+                    if ((ball.type != "star") && !ball.exploded) {
                         game_make_explosion(friend_bounds.x + friend_bounds.width / 2, friend_bounds.y + friend_bounds.height / 2);
                         ball.exploded = true;
 

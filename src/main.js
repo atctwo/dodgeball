@@ -118,6 +118,10 @@ document.addEventListener("keydown", e=> {
             game_make_ball();
             break;
 
+        case "g":
+            game_make_green_balls();
+            break;
+
         case "r":
             ext_game_resume();
             break;
