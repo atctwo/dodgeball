@@ -10,5 +10,5 @@
 - [x] link colours
 - [x] new record
 - [x] delete scores?
-- [ ] custom mode preset buttons
+- [x] custom mode preset buttons
 - [ ] tune levels

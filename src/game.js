@@ -439,6 +439,9 @@ export function game_set_settings(new_settings) {
 export function game_get_settings() {
     return settings;
 }
+export function game_get_default_settings() {
+    return settings_defaults;
+}
 
 export async function game_setup() {
 

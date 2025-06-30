@@ -120,7 +120,18 @@
             <p>Test the limits of your skill (and this game) by creating your own game with custom rules!</p>
             <p>Hover over the names of each setting to see a description of what they do!</p>
 
-            <form id="custom-parameters">
+            <div id="custom-parameters">
+                <h2>Presets</h2>
+                <p><em>Clicking on these buttons will overwrite the values in the fields below with settings from the corresponding level.</em></p>
+                <div>
+                    <button class="button" onclick="ext_custom_preload(-1)">Defaults</button>
+                    <button class="button" onclick="ext_custom_preload(1)">Level 1</button>
+                    <button class="button" onclick="ext_custom_preload(2)">Level 2</button>
+                    <button class="button" onclick="ext_custom_preload(3)">Level 3</button>
+                    <button class="button" onclick="ext_custom_preload(4)">Level 4</button>
+                    <button class="button" onclick="ext_custom_preload(5)">Level 5</button>
+                </div>
+
                 <h2>Object Spawning</h2>
                 <table class="custom-table">
                     <tr>
@@ -216,7 +227,7 @@
                         <td><input type="number" name="ball_accel_accel_y" id="ball_accel_accel_y" value="0.00075"></td>
                     </tr>
                 </table><br>
-            </form><br>
+            </div><br>
 
             <button class="button" onclick="ext_game_start_custom();">Start!</button>
             <button class="button" onclick="ext_game_quit();">Back to Main Menu</button>

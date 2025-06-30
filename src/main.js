@@ -256,6 +256,39 @@ window.ext_clear_data = () => {
     load_scores();
 }
 
+window.ext_custom_preload = (lvl) => {
+
+    console.log("setting custom mode fields");
+
+    // populate with default values
+    // for each setting value
+    Object.keys(game_get_settings()).forEach(name => {
+
+        // get element for this setting
+        let el = document.getElementById(name);
+
+        // if element exists
+        if (el) {
+            el.value = game_get_default_settings()[name];
+        }
+
+        // if level is from 1 to 5
+        if (1 <= lvl && lvl <= 5) {
+
+            // if this level's settings obj has this setting
+            if (Object.keys(level_settings[lvl]).includes(name)) {
+
+                // overwrite the value in the form
+                el.value = level_settings[lvl][name];
+
+            }
+
+        }
+
+    });
+
+}
+
 //---------------------------------------------
 // high score handling
 //---------------------------------------------
