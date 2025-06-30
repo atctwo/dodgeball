@@ -196,3 +196,8 @@ a:hover:not(.nav-link, .btn, .dropdown-item, .page-link) {
     0% { background-position-x: 0%; }
     100% {background-position-x: 1000px;}
 }
+
+#alice {
+    height: 48px;
+    vertical-align: middle;
+}
