@@ -209,14 +209,17 @@ export function game_start() {
         scoreStarsValue.innerText = game_stars;
 
         // start ball timers
+        if (settings.ball_chance_big > 0)
         timers.push(setTimeout(() => {
             game_make_ball("big");
         }, settings.ball_big_delay));
 
+        if (settings.ball_chance_green > 0)
         timers.push(setTimeout(() => {
             game_make_green_balls();
         }, settings.ball_green_delay));
 
+        if (settings.ball_chance_red > 0)
         timers.push(setTimeout(() => {
             game_make_ball("red");
         }, settings.ball_red_delay));
