@@ -658,7 +658,7 @@ export async function game_setup() {
                 }
 
                 // out of bounds check
-                if (ball.obj.position.y > app.screen.height + 70) {
+                if (ball.obj.position.y > app.screen.height + ball.obj.height) {
                     ball.obj.destroy();
                     objs_balls.splice(i, 1);
                 }
