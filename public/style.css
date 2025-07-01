@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Varela+Round&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Varela+Round&display=swap');
 body {
     margin: 0;
     padding: 0;
     color: #ffffff;
     background: #4B0D91;
     background: linear-gradient(180deg,rgba(75, 13, 145, 1) 0%, rgba(97, 19, 156, 1) 100%);
-    font-family: "Nunito", sans-serif;
+    font-family: "Balsamiq Sans", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: Varela Round, serif;
+    font-family: "Balsamiq Sans", serif;
 }
 
 a:link:not(.nav-link, .btn, .dropdown-item, .page-link), 
@@ -43,9 +42,13 @@ a:hover:not(.nav-link, .btn, .dropdown-item, .page-link) {
 }
 #score-timer {
     display: none;
+    font-family: "Nunito", sans-serif;
+    font-variant-numeric: tabular-nums;
 }
 #score-stars {
     display: none;
+    font-family: "Nunito", sans-serif;
+    font-variant-numeric: tabular-nums;
 }
 
 #dim {
@@ -86,7 +89,7 @@ a:hover:not(.nav-link, .btn, .dropdown-item, .page-link) {
     margin: 5px;
     padding: 10px;
     background-color: #a56be7;
-    font-family: "Nunito", sans-serif;
+    font-family: "Balsamiq Sans", sans-serif;
     font-size: 12pt;
     border: 1px solid transparent;
     border-radius: 7px;
